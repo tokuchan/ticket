@@ -20,6 +20,7 @@ subcommands neatly in one program.
 # [Main Function]
 
 # [Command Imports]
+import commands.init as init
 
 # [Regular Imports]
 import argparse
@@ -33,7 +34,16 @@ def main():
     parser = argparse.ArgumentParser()                                          # Construct a new argument parser.
     # Add any global arguments here.
     subparsers = parser.add_subparsers(help='sub_command help')                 # Add a set of sub parsers.
+
     # Construct and initialize command objects here.
+    init.getArgumentParser(subparsers)                                          # Load up the init command object.
+    
+    # Parse arguments and run program.
     args = parser.parse_args()                                                  # Parse command arguments.
-    # Run program.
+    args.func(args)                                                             # Each subcommand must use set_default(func=main_function) to define their main.
+    print("Main program called with args: {}".format(args))
+    pass
+
+if __name__ == '__main__':
+    main()
     pass
