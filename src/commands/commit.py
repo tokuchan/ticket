@@ -1,15 +1,12 @@
 '''
-Initialize a ticket database.
+Commit all tickets in the index to the database.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
-
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+The ticket-editing commands, as well as add, all operate on the index, a
+directory that contains temporary references to objects in the database. When
+all edits are done, and it's time to commit changes, this command opens EDITOR,
+collects a comment from the user which it applies to all tickets to be
+committed. Then, commit actually opens a new transaction, updates the ticket
+DB, and the file DB, then closes the transaction.
 '''
 
 import argparse
@@ -20,11 +17,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('commit', help='Commit all tickets in the index to the database.')
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Commit called with args: {}".format(args))
     pass

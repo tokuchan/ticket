@@ -1,15 +1,16 @@
 '''
-Initialize a ticket database.
+Set configuration key/value pairs.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
+The configuration data in ticket are set in key/value pairs. These pairs are
+recorded in several places:
 
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+1. The file `/etc/ticketrc` sets system wide configuration key/value pairs.
+2. The file `$HOME/.ticketrc` sets user-specific configuration key/value pairs.
+3. The file `.ticket/config` sets folder-specific configuration key/value
+   pairs.
+
+This command allows the user to get an set key/value pairs for each of these
+three locations easily and naturally.
 '''
 
 import argparse
@@ -20,11 +21,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('config', help='Configure the ticket system.')
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Config called with args: {}".format(args))
     pass

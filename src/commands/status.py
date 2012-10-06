@@ -1,15 +1,18 @@
 '''
-Initialize a ticket database.
+List the status of tickets.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
+This command lists the status of tickets. By default, only open and working
+tickets are displayed. In addition, in a separate pane, tickets in the index
+are listed.  This way, the user knows exactly which tickets are being edited
+and which are not. In addition, each ticket's displayed line number can be used
+as a relative reference for that ticket. Since the status listing is order by
+the age of the last status change, this presents an easy and natural way to
+refer to tickets, without having to remember their SHA hashes.
 
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+In addition to this command's ability to display tickets in order of status
+change, the user can also request other orderings, as well as filters, and a
+specified column order. Thus, this command is a powerful tool for ticket system
+reporting, as well as a quick way to keep on top of tasks.
 '''
 
 import argparse
@@ -20,11 +23,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('status', help='Display the status of the ticket system.')
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Status called with args: {}".format(args))
     pass

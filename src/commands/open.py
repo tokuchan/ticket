@@ -1,15 +1,10 @@
 '''
-Initialize a ticket database.
+Change a ticket's state to open.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
-
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+Only open tickets are displayed by status by default. Also, only open tickets
+and their attachments are guaranteed safe from the garbage collector. Thus, if
+one mistakenly closes a ticket that one didn't mean to, this command will allow
+one to rectify one's mistake.
 '''
 
 import argparse
@@ -20,11 +15,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('open', help='Change a ticket\'s state to open.')
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Open called with args: {}".format(args))
     pass

@@ -1,15 +1,10 @@
 '''
-Initialize a ticket database.
+Show the complete details of a particular ticket.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
-
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+Given a single ticket, this command prints the entirety of that ticket's
+information, including all notes and all attachments and references to screen.
+This is the command that one runs to gather all information available about any
+particular ticket.
 '''
 
 import argparse
@@ -20,11 +15,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('show', help='Show the complete details of a ticket.')
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Show called with args: {}".format(args))
     pass

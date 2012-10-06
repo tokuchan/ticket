@@ -1,15 +1,12 @@
 '''
-Initialize a ticket database.
+Run Ticket's garbage collector.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
-
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+The ticket garbage collector scans the databases for closed tickets whose close
+dates are strictly older than duration time ago, where duration is by default
+two weeks. For all tickets is find, gc marks these tickets and removes them
+from the database. Then, it scans the object database for objects that no
+longer are linked to anything and removes them from the object database. This
+command is run automatically by some of the other commands every so often.
 '''
 
 import argparse
@@ -20,11 +17,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('gc', help='Run garbage collector.')
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Gc called with args: {}".format(args))
     pass

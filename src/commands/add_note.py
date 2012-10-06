@@ -1,15 +1,15 @@
 '''
-Initialize a ticket database.
+Add a note to a ticket.
 
-When this command is run on an unticketed folder, we add a new .ticket folder
-and write into it the various components of the system. These components
-include:
-
-1. The sqlite3 `tickets` database that actually holds the tickets themselves.
-2. The `objects` folder, which will hold attachments and other files that need
-   to exist outside of the database.
-3. The `config` folder, which will hold any configuration files that we need to
-   read/write.
+Normally, when the state of a ticket changes, that ticket is added to the index
+and held for a commit. Then, when commit is run, the comment that the user
+enters will be copied to every commited ticket. This command overrides this
+behaviour, allowing the user to set the note on each ticket seperately. Then,
+when commit is run, the commit comment is appended to the note for each ticket
+and the whole thing becomes that ticket's logged note. This allows the user to
+change state on several tickets at the same time, with unique comments for each
+ticket, as well as one comment that is appended to all of the tickets, perhaps
+the reason why the set of tickets were modified together in the first place.
 '''
 
 import argparse
@@ -20,11 +20,11 @@ def getArgumentParser(parsers):
     function. This allows us to transfer execution to the main function defined
     below.
     '''
-    parser = parsers.add_parser('init', help='Initialize a new ticket database in the current folder.')
+    parser = parsers.add_parser('add_note', help="Set the given ticket's note independently of other tickets.")
     parser.set_defaults(func=main)                                              # We want to run the main function defined below.
     return parser
 pass
 
 def main(args):
-    print("Init called with args: {}".format(args))
+    print("Add_note called with args: {}".format(args))
     pass

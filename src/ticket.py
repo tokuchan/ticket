@@ -20,7 +20,19 @@ subcommands neatly in one program.
 # [Main Function]
 
 # [Command Imports]
+import commands.add as add
+import commands.add_note as add_note
+import commands.close as close
+import commands.commit as commit
+import commands.config as config
+import commands.gc as gc
 import commands.init as init
+import commands.log as log
+import commands.open as open
+import commands.show as show
+import commands.start as start
+import commands.status as status
+import commands.stop as stop
 
 # [Regular Imports]
 import argparse
@@ -36,7 +48,19 @@ def main():
     subparsers = parser.add_subparsers(help='sub_command help')                 # Add a set of sub parsers.
 
     # Construct and initialize command objects here.
-    init.getArgumentParser(subparsers)                                          # Load up the init command object.
+    add.getArgumentParser(subparsers)                                           # Load up the add parser.
+    add_note.getArgumentParser(subparsers)                                      # Load up the add_note parser.
+    close.getArgumentParser(subparsers)                                         # Load up the close parser.
+    commit.getArgumentParser(subparsers)                                        # Load up the commit parser.
+    config.getArgumentParser(subparsers)                                        # Load up the config parser.
+    gc.getArgumentParser(subparsers)                                            # Load up the gc parser.
+    init.getArgumentParser(subparsers)                                          # Load up the init parser.
+    log.getArgumentParser(subparsers)                                           # Load up the log parser.
+    open.getArgumentParser(subparsers)                                          # Load up the open parser.
+    show.getArgumentParser(subparsers)                                          # Load up the show parser.
+    start.getArgumentParser(subparsers)                                         # Load up the start parser.
+    status.getArgumentParser(subparsers)                                        # Load up the status parser.
+    stop.getArgumentParser(subparsers)                                          # Load up the stop parser.
     
     # Parse arguments and run program.
     args = parser.parse_args()                                                  # Parse command arguments.
