@@ -9,6 +9,11 @@ such, it provides the same interface as the final database, but also provides
 several syncing methods, so that commits are relatively painless.
 '''
 
+import shelve
+import TicketModel
+
+index_file = '.ticket/index_db'
+
 class IndexModel:
     def __init__(self):
         pass
@@ -18,10 +23,11 @@ class IndexModel:
         Extract the ID of an extant Ticket, then update our copy of that
         ticket. If the ID does not obtain, then we create our ticket first.
         '''
-        # The ticket's ID.
-        # Reify the Ticket, using reifyTicket().
-        # Merge the two tickets into one.
-        # Write the new ticket object to the index.
+        with shelve.open(index_file) as shelf:                                  # Provide a context managed index db.
+            the_ticket = self.reifyTicket(ticket.getID())                       # Reify the Ticket, using reifyTicket().
+            updated_ticket = the_ticket.merge(ticket)                           # Update the ticket.
+            shelf[ticket.getID()] = updated_ticket                              # Write the new ticket object to the index.
+            pass
         pass
 
     def reifyTicket(self, ticket_id):
@@ -31,11 +37,10 @@ class IndexModel:
         then try to get a reified Ticket from the main database, and return
         that.
         '''
-        # Does ticket ID exist in index?
-        # If not, does ticket ID exist in database?
-        # If so, retrieve ticket data from database.
-        # If so, retrieve ticket data from index.
-        # Given ticket data, construct and return a new Ticket.
+        with shelve.open(index_file) as shelf:
+            the_ticket = shelf.get(ticket_id, TicketModel.Ticket())             # If the ticket isn't in the index, create it.
+            return the_ticket
+            pass
         pass
 
     def deleteTicket(self, ticket_id):
@@ -43,22 +48,9 @@ class IndexModel:
         Given a ticket id, remove that Ticket from our index. If there is no
         Ticket in our index, then simply do nothing.
         '''
-        # The ticket's ID.
-        # Does the ticket exist in our index?
-        # If so, delete it.
+        with shelve.open(index_file) as shelf:
+            del shelf[ticket_id]
+            pass
         pass
 
-    def __write_object(self, objID, objRef):
-        '''
-        Given an object reference, use serialization to record that object to a
-        file in the index folder, named by the objID.
-        '''
-        pass
-
-    def __read_object(self, objID):
-        '''
-        Given an object ID, use serialization to read in that object from a
-        file in the index, using the object ID.
-        '''
-        pass
     pass
