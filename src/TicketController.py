@@ -21,8 +21,55 @@ garbage collector. These manipulations all take place under the aegis of this
 controller.
 '''
 
+import TicketModel
+import IndexModel
+
 class TicketController:
     def __init__(self):
         pass
+
+    def initSystem(self):
+        '''
+        Initialize the .ticket system.
+        '''
+        pass
+
+    def addTicketToIndex(self, ticket):
+        '''
+        Add the supplied ticket to the index.
+        '''
+        pass
+
+    def openTicket(self, ticket):
+        '''
+        Set ticket's state to open.
+        '''
+        pass
+
+    def closeTicket(self, ticket):
+        '''
+        Set ticket's state to closed.
+        '''
+        pass
+
+    def startTicket(self, ticket):
+        '''
+        Mark the time and set the ticket's state to working.
+        '''
+        pass
+
+    def stopTicket(self, ticket):
+        '''
+        Mark the time and set the ticket's state to not working.
+        '''
+        pass
+
+    def addNote(self, ticket, note):
+        '''
+        Add the supplied note to the end of the ticket's log.
+        '''
+        pass
+
+
     pass
 
